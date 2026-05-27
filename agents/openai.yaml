@@ -1,0 +1,3 @@
+display_name: ZQF Doc Init
+short_description: Initialize AI-native project docs with PRD, spec, API, and test templates.
+default_prompt: Initialize or standardize this project documentation using the ZQF AI-native docs template.
