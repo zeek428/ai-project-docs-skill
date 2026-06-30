@@ -2,6 +2,8 @@
 
 [English](README.md) | 中文
 
+AI 原生项目文档初始化 Skill 与模板，用于 PRD、Spec、API 文档、测试用例、ADR 和 Runbook。
+
 `ai-project-docs-skill` 是一个面向 AI 原生软件开发的文档初始化 Skill 与模板仓库。它提供一套可复制、可自动初始化的项目文档结构，帮助团队在需求、技术方案、API、测试、运维和架构决策之间建立统一上下文。
 
 这个仓库不是业务应用代码，而是用于给其他项目生成 `docs/` 文档体系的模板源。
@@ -53,9 +55,18 @@ python3 scripts/init_docs.py \
 
 将本仓库复制到你的 Codex 或 Claude Code skills 目录，之后即可在目标项目中按 Skill 指南执行文档初始化。
 
+Codex：
+
 ```bash
 mkdir -p ~/.codex/skills/zqf-doc-init
 cp -R /path/to/ai-project-docs-skill/* ~/.codex/skills/zqf-doc-init/
+```
+
+Claude Code：
+
+```bash
+mkdir -p ~/.claude/skills/zqf-doc-init
+cp -R /path/to/ai-project-docs-skill/* ~/.claude/skills/zqf-doc-init/
 ```
 
 Skill 的入口文件是 [SKILL.md](SKILL.md)。旧入口 [zqf-doc-init.md](zqf-doc-init.md) 仍保留，用于兼容历史用法。
@@ -81,7 +92,7 @@ Skill 的入口文件是 [SKILL.md](SKILL.md)。旧入口 [zqf-doc-init.md](zqf-
 | `--overwrite` | 覆盖已有文件，默认不会覆盖 |
 | `--include-examples` | 同步复制 `_examples` 示例目录 |
 
-## 生成后的文档结构
+## 默认生成的文档结构
 
 ```text
 docs/
@@ -96,18 +107,12 @@ docs/
 │   │   ├── prd.md
 │   │   ├── prototype.html
 │   │   └── prototype/index.html
-│   └── _examples/
-│       └── prd-example.md
 │
 ├── 02-specs/              # 技术规格文档
 │   ├── _template/
 │   │   ├── spec.md
 │   │   ├── api.md
 │   │   └── test-case.md
-│   ├── _examples/
-│   │   ├── spec-example.md
-│   │   ├── api-example.md
-│   │   └── test-case-example.md
 │   └── architecture/
 │       ├── system-overview.md
 │       └── tech-stack.md
@@ -117,6 +122,17 @@ docs/
 ├── 05-runbooks/           # 部署、监控、事故响应 runbook
 ├── 06-standards/          # 测试、编码、安全标准
 └── 07-deprecated/         # 废弃文档说明
+```
+
+默认不会复制 `_examples/` 示例目录。需要把示例也放入目标项目时，请添加 `--include-examples`，会额外复制：
+
+```text
+docs/
+├── 01-prd/_examples/prd-example.md
+└── 02-specs/_examples/
+    ├── spec-example.md
+    ├── api-example.md
+    └── test-case-example.md
 ```
 
 ## 文档工作流
@@ -141,6 +157,8 @@ docs/
 4. `docs/02-specs/{feature}/api.md`
 5. `docs/02-specs/{feature}/test-case.md`
 6. `docs/04-decisions/`
+
+当前模板默认生成 `CLAUDE.md` 作为 AI 入口。如果目标项目主要面向 Codex，可按需新增或改写 `AGENTS.md`，用于存放仓库级 agent 指令。
 
 ## 仓库内容
 

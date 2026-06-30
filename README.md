@@ -2,6 +2,8 @@
 
 English | [中文](README.zh.md)
 
+AI-native documentation initializer skill and templates for PRDs, specs, API docs, test cases, ADRs, and runbooks.
+
 `ai-project-docs-skill` is a documentation initializer skill and template repository for AI-native software development. It provides a reusable, scriptable documentation structure that helps teams keep product requirements, technical design, API documentation, test cases, operations notes, and architecture decisions in one shared context.
 
 This repository is not application code. It is a template source used to generate a standardized `docs/` system for other projects.
@@ -53,9 +55,18 @@ python3 scripts/init_docs.py \
 
 Copy this repository into your Codex or Claude Code skills directory, then follow the skill instructions from your target project.
 
+For Codex:
+
 ```bash
 mkdir -p ~/.codex/skills/zqf-doc-init
 cp -R /path/to/ai-project-docs-skill/* ~/.codex/skills/zqf-doc-init/
+```
+
+For Claude Code:
+
+```bash
+mkdir -p ~/.claude/skills/zqf-doc-init
+cp -R /path/to/ai-project-docs-skill/* ~/.claude/skills/zqf-doc-init/
 ```
 
 The current skill entry point is [SKILL.md](SKILL.md). The legacy entry point [zqf-doc-init.md](zqf-doc-init.md) is kept for backward compatibility.
@@ -81,7 +92,7 @@ Common options:
 | `--overwrite` | Overwrites existing files; disabled by default |
 | `--include-examples` | Copies `_examples` reference directories |
 
-## Generated Documentation Structure
+## Default Generated Documentation Structure
 
 ```text
 docs/
@@ -96,18 +107,12 @@ docs/
 │   │   ├── prd.md
 │   │   ├── prototype.html
 │   │   └── prototype/index.html
-│   └── _examples/
-│       └── prd-example.md
 │
 ├── 02-specs/              # Technical specifications
 │   ├── _template/
 │   │   ├── spec.md
 │   │   ├── api.md
 │   │   └── test-case.md
-│   ├── _examples/
-│   │   ├── spec-example.md
-│   │   ├── api-example.md
-│   │   └── test-case-example.md
 │   └── architecture/
 │       ├── system-overview.md
 │       └── tech-stack.md
@@ -117,6 +122,17 @@ docs/
 ├── 05-runbooks/           # Deployment, monitoring, and incident response runbooks
 ├── 06-standards/          # Testing, coding, and security standards
 └── 07-deprecated/         # Deprecated documentation notes
+```
+
+By default, `_examples/` reference directories are not copied. Add `--include-examples` when you want the generated project to include:
+
+```text
+docs/
+├── 01-prd/_examples/prd-example.md
+└── 02-specs/_examples/
+    ├── spec-example.md
+    ├── api-example.md
+    └── test-case-example.md
 ```
 
 ## Documentation Workflow
@@ -141,6 +157,8 @@ Recommended reading order:
 4. `docs/02-specs/{feature}/api.md`
 5. `docs/02-specs/{feature}/test-case.md`
 6. `docs/04-decisions/`
+
+The template currently generates `CLAUDE.md` as the default AI entry point. For Codex-heavy projects, add or adapt `AGENTS.md` with repository-specific agent instructions.
 
 ## Repository Contents
 
